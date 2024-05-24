@@ -10,7 +10,8 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
-
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import DirectoryLoader
 
 import streamlit as st
 from langchain.callbacks.base import BaseCallbackHandler
@@ -38,16 +39,17 @@ class StreamHandler(BaseCallbackHandler):
 
 load_dotenv(find_dotenv())
 
-
+DATA_PATH = "data";
+loader = DirectoryLoader('DATA_PATH', glob="*.pdf")
 # Load and prepare documents
-loader = WebBaseLoader(
-    [
-        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=CD1ABF9F-5308-450E-813E-60B84F9EDAA5",
-        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=6E03B0E2-5E93-43C5-BBFB-E4D6446DB180",
-        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=81E1DC57-5DC2-46ED-84AF-3C8BB46F3F49",
-        "https://web.dmi.unict.it/corsi/l-31/contatti",
-    ]
-)
+#loader = WebBaseLoader(
+#    [
+#        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=CD1ABF9F-5308-450E-813E-60B84F9EDAA5",
+#        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=6E03B0E2-5E93-43C5-BBFB-E4D6446DB180",
+#        "https://web.dmi.unict.it/corsi/l-31/insegnamenti?seuid=81E1DC57-5DC2-46ED-84AF-3C8BB46F3F49",
+#        "https://web.dmi.unict.it/corsi/l-31/contatti",
+#    ]
+#)
 docs = loader.load()
 documents = RecursiveCharacterTextSplitter(
     chunk_size=1000, chunk_overlap=400
