@@ -71,7 +71,7 @@ vector = PineconeVectorStore(index_name=index_name, embedding=OpenAIEmbeddings()
 retriever = vector.as_retriever(search_type="mmr", search_kwargs={"k": 4})
 
 # Initialize the model
-model = ChatOpenAI(model="gpt-3.5-turbo", streaming=True)
+model = ChatOpenAI(model="gpt-4o", streaming=True)
 
 
 # Define math tool
@@ -85,7 +85,8 @@ math_tool = Tool.from_function(name="Calculator",
 retriever_tool = create_retriever_tool(
     retriever,
     "Preventive_Helper",
-    "You are a full assistant, your work is to create preventive calculating total price based on materials and quantity of these materials",
+    "You are a preventive assistant, your work is to create preventive calculating total price based on materials and quantity of these materials.
+    If you don't know the answer response with BOOO",
 )
 
 
