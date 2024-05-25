@@ -1,6 +1,5 @@
 from dotenv import load_dotenv, find_dotenv
 import sqlite3
-from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.tools.retriever import create_retriever_tool
@@ -8,8 +7,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
-from langchain_community.document_loaders import PyPDFLoader, PyPDFDirectoryLoader
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.chains import LLMMathChain
 from langchain.agents import Tool
