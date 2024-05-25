@@ -13,9 +13,12 @@ from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.chains import LLMMathChain
 from langchain.agents import Tool
+from langchain_pinecone import PineconeVectorStore
 
 import streamlit as st
+import os
 from langchain.callbacks.base import BaseCallbackHandler
+from langchain.globals import set_verbose, get_verbose
 
 # Streaming Handler
 class StreamHandler(BaseCallbackHandler):
@@ -25,7 +28,6 @@ class StreamHandler(BaseCallbackHandler):
         self.container = container
         self.text = initial_text
         self.run_id_ignore_token = None
-
     def on_llm_start(self, serialized: dict, prompts: list, **kwargs):
         # Workaround to prevent showing the rephrased question as output
         if prompts[0].startswith("Human"):
@@ -39,7 +41,6 @@ class StreamHandler(BaseCallbackHandler):
 
 
 DATA_PATH = "data/"
-CHROMA_PATH = "chroma/"
 load_dotenv(find_dotenv())
 
 
@@ -57,19 +58,21 @@ connection.close()
 
 #SAVE DATA ON CHROMA DB
 
+index_name = "ale-vector-store"
 #loader = DirectoryLoader(DATA_PATH, glob="*.pdf", show_progress=True, use_multithreading=True)
-
 #loader = PyPDFDirectoryLoader(DATA_PATH)
 #docs = loader.load()
 #documents = RecursiveCharacterTextSplitter(
 #    chunk_size=500, chunk_overlap=200
 #).split_documents(docs)
-#vector = Chroma.from_documents(documents, OpenAIEmbeddings(), persist_directory = CHROMA_PATH)
+#vector = PineconeVectorStore.from_documents(documents, OpenAIEmbeddings(), index_name=index_name)
+
+#Chroma.from_documents(documents, OpenAIEmbeddings(), persist_directory = CHROMA_PATH)
 
 
 
 #LOAD DATA FROM CHROMA DB
-vector = Chroma( persist_directory = CHROMA_PATH, embedding_function=OpenAIEmbeddings())
+vector = PineconeVectorStore(index_name=index_name, embedding=OpenAIEmbeddings())
 retriever = vector.as_retriever(search_type="mmr", search_kwargs={"k": 4})
 
 # Initialize the model
@@ -117,40 +120,73 @@ prompt = ChatPromptTemplate.from_messages(
 
 # Create the agent
 agent = create_tool_calling_agent(model, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+set_verbose(True)
+agent_executor = AgentExecutor(agent=agent, tools=tools)
+
+
+
 
 # Streamlit app
-st.set_page_config(page_title="Nankurunaisa Assistant", page_icon="🌐")
-st.header("Your personal assistant 🤖")
+st.set_page_config(page_title="A.L.E. Assistant", page_icon="🤖")
+st.header("Il tuo Cost Estimator di fiducia 🧮💲")
 st.write(
-    """Hi. I am an agent powered by Neodata.
-I will be your virtual assistant to help you with your experience within the student portal. 
-Ask me anything about your courses or academic career"""
+    """Ciao. Sono qui per aiutarti a stimare il preventivo perfetto per le tue esigenze!"""
 )
+st.caption("Enpowered by A.L.E.")
 st.write(
-    "[![view source code ](https://img.shields.io/badge/view_source_code-gray?logo=github)](https://github.com/neodatagroup/hackathon_RAG/tree/main)"
+    "[![view source code ](https://img.shields.io/badge/view_source_code-gray?logo=github)](https://github.com/LivioLipani/Chatbot_Hackaton.git)"
 )
 
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+
+
+if "toast_shown" not in st.session_state:
+    st.session_state["toast_shown"] = True
+
+if "rate-limit" not in st.session_state:
+    st.session_state["rate-limit"] = False
+
+
+# Show a warning if the model is rate-limited
+if st.session_state["rate-limit"]:
+    st.toast("Probably rate limited.. Go easy folks", icon="⚠️")
+    st.session_state["rate-limit"] = False
+
+
+INITIAL_MESSAGE = [
+    {
+        "role": "assistant",
+        "content": "Ciao, sono Gianni, il mio compito è quello di fornirti una stima di preventivo per il tuo progetto edilizio"
+    },
+]
+
+with open("ui/sidebar.md", "r", encoding="utf_8") as sidebar_file:
+    sidebar_content = sidebar_file.read()
+
+
+with open("ui/styles.md", "r") as styles_file:
+    styles_content = styles_file.read()
+
+st.logo("ui/Logo_ALE.png")
+st.sidebar.markdown(sidebar_content)
+
+st.write(styles_content, unsafe_allow_html=True)
+
+
+
+
+# Initialize the chat messages history
+if "messages" not in st.session_state.keys():
+    st.session_state["messages"] = INITIAL_MESSAGE
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-#with st.sidebar:
-#    st.header("I tuoi corsi")
-#    st.markdown("- INTRODUZIONE AL DATA MINING")
-#    st.markdown("- BASI DI DATI A - L")
-#    st.markdown("- ALGEBRA LINEARE E GEOMETRIA A - E")
-
-#    st.divider()
-    
-#    st.markdown("Chiedimi i contatti della segreteria!")
 
 
-if prompt := st.chat_input("What is up?", key="first_question"):
+
+if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
