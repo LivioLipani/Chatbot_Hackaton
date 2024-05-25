@@ -16,7 +16,6 @@ from langchain.agents import Tool
 from langchain_pinecone import PineconeVectorStore
 
 import streamlit as st
-import os
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.globals import set_verbose, get_verbose
 
@@ -66,9 +65,6 @@ index_name = "ale-vector-store"
 #    chunk_size=500, chunk_overlap=200
 #).split_documents(docs)
 #vector = PineconeVectorStore.from_documents(documents, OpenAIEmbeddings(), index_name=index_name)
-
-#Chroma.from_documents(documents, OpenAIEmbeddings(), persist_directory = CHROMA_PATH)
-
 
 
 #LOAD DATA FROM CHROMA DB
