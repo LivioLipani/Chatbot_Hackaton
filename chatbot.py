@@ -73,7 +73,7 @@ vector = PineconeVectorStore(index_name=index_name, embedding=OpenAIEmbeddings()
 retriever = vector.as_retriever(search_type="mmr", search_kwargs={"k": 4})
 
 # Initialize the model
-model = ChatOpenAI(model="gpt-3.5-turbo", streaming=True)
+model = ChatOpenAI(model="gpt-4o", streaming=True)
 
 
 # Define math tool
