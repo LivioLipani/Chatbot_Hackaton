@@ -59,6 +59,7 @@ connection.close()
 
 index_name = "ale-vector-store"
 #loader = DirectoryLoader(DATA_PATH, glob="*.pdf", show_progress=True, use_multithreading=True)
+
 #loader = PyPDFDirectoryLoader(DATA_PATH)
 #docs = loader.load()
 #documents = RecursiveCharacterTextSplitter(
@@ -119,9 +120,6 @@ agent = create_tool_calling_agent(model, tools, prompt)
 set_verbose(True)
 agent_executor = AgentExecutor(agent=agent, tools=tools)
 
-
-
-
 # Streamlit app
 st.set_page_config(page_title="A.L.E. Assistant", page_icon="🤖")
 st.header("Il tuo Cost Estimator di fiducia 🧮💲")
@@ -178,8 +176,6 @@ if "messages" not in st.session_state.keys():
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-
-
 
 
 if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
