@@ -1,5 +1,5 @@
 langchain
 unstructured # Document loading
- # Vector storage
 openai # For embeddings
 langchain_community
+dotenv
