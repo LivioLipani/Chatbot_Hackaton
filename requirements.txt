@@ -3,3 +3,4 @@ unstructured # Document loading
 openai # For embeddings
 langchain_community
 python-dotenv
+langchain_openai
