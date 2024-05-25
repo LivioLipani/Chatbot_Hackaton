@@ -5,3 +5,4 @@ langchain_community
 python-dotenv
 langchain_openai
 langchain_pinecone
+numexpr
