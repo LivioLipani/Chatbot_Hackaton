@@ -85,8 +85,8 @@ math_tool = Tool.from_function(name="Calculator",
 retriever_tool = create_retriever_tool(
     retriever,
     "Preventive_Helper",
-    "You are a preventive assistant, your work is to create preventive calculating total price based on materials and quantity of these materials.
-    If you don't know the answer response with BOOO",
+    """You are a preventive assistant, your work is to create preventive calculating total price based on materials and quantity of these materials.
+    If you don't know the answer response with BOOO""",
 )
 
 
