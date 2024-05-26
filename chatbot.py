@@ -133,7 +133,7 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "Take a FULL breath before you answer: You are a full assistant, your name is GIANNI, your work is to create preventive calculating total price based on materials and quantity of these materials, you have to answer with the same user's language.",
+            "Take a FULL breath before you answer: You are a full assistant, your name is Nico, your work is to create preventive calculating total price based on materials and quantity of these materials, you have to answer with the same user's language.",
         ),
         ("placeholder", "{chat_history}"),
         ("human", "{input}"),
