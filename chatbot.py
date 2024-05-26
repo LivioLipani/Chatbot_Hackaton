@@ -12,6 +12,8 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.chains import LLMMathChain
 from langchain.agents import Tool
 from langchain_pinecone import PineconeVectorStore
+import time
+from streamlit_feedback import streamlit_feedback
 
 import streamlit as st
 from langchain.callbacks.base import BaseCallbackHandler
@@ -29,6 +31,7 @@ class StreamHandler(BaseCallbackHandler):
         # Workaround to prevent showing the rephrased question as output
         if prompts[0].startswith("Human"):
             self.run_id_ignore_token = kwargs.get("run_id")
+        
 
     def on_llm_new_token(self, token: str, **kwargs) -> None:
         if self.run_id_ignore_token == kwargs.get("run_id", False):
@@ -38,7 +41,7 @@ class StreamHandler(BaseCallbackHandler):
 
 
 DATA_PATH = "data/"
-load_dotenv(find_dotenv())
+load_dotenv(override=True)
 
 
 #SQLITE TEST
@@ -80,22 +83,36 @@ math_tool = Tool.from_function(name="Calculator",
                 func=problem_chain.run,
                  description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions.")
 
+feedback_state = False
+
+#feedback tool
+#def feedback_button(input_text):
+#st.session_state["show_feedback_button"] = True
+    
+#feedback_tool = Tool.from_function(
+#    name = "ContactHumanAgent",
+#    func = feedback_button,  # Updated to take an input
+#    description = """As soon as the user receives the quote table, ask them for feedback."""
+#)
 
 # Create retriever tool
 retriever_tool = create_retriever_tool(
     retriever,
     "Preventive_Helper",
-    """You are a preventive assistant, your work is to create preventive calculating total price based on materials and quantity of these materials.
-    If you don't know the answer response with BOOO""",
+    f"""You are a preventive assistant.Don't go off topic. Your task is to create a cost estimate based on materials and their quantities. Follow these steps: /
+    1. ask the user about what to quote
+    2. ask for more information about preventive
+    3. Once you have sufficient data, create a comprehensive table with all the details with {row} discount applied.
+    4. set this variable {feedback_state==True}
+    """,
 )
 
 
 # Create Wikidata tool
 insult_tool = TavilySearchResults(name="Insult_your_mom_next_time", description="Thinks very well and check if what user told you is an insult, if someone insults you telling you something offensive in every language, responds with NANKURUNAISA")
 
-
 # Define tools 
-tools = [math_tool, retriever_tool, insult_tool]
+tools = [ math_tool, retriever_tool, insult_tool]
 
 
 
@@ -119,6 +136,8 @@ agent = create_tool_calling_agent(model, tools, prompt)
 set_verbose(True)
 agent_executor = AgentExecutor(agent=agent, tools=tools)
 
+
+
 # Streamlit app
 st.set_page_config(page_title="A.L.E. Assistant", page_icon="🤖")
 st.header("Il tuo Cost Estimator di fiducia 🧮💲")
@@ -129,7 +148,6 @@ st.caption("Enpowered by A.L.E.")
 st.write(
     "[![view source code ](https://img.shields.io/badge/view_source_code-gray?logo=github)](https://github.com/LivioLipani/Chatbot_Hackaton.git)"
 )
-
 
 
 
@@ -162,11 +180,18 @@ with open("ui/styles.md", "r") as styles_file:
 
 st.logo("ui/Logo_ALE.png")
 st.sidebar.markdown(sidebar_content)
-
 st.write(styles_content, unsafe_allow_html=True)
+        
 
+if "variable_set_at_startup" not in st.session_state:
+    st.session_state.variable_set_at_startup = True
+    st.session_state.my_variable = "valore_iniziale"
 
-
+def save_feedback(*args):
+    if args[0]['score'] == '👍':
+        print("1")
+    else: 
+        print("0")
 
 # Initialize the chat messages history
 if "messages" not in st.session_state.keys():
@@ -181,7 +206,6 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-
     with st.chat_message("assistant"):
         
         stream_handler = StreamHandler(st.empty())
@@ -197,6 +221,9 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
             callbacks=[stream_handler],
         )
         response = result.get("output")
-
+    feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start", on_submit=save_feedback)
     st.session_state.messages.append({"role": "assistant", "content": response})
     # st.chat_message("assistant").markdown(response)
+    #feedback button
+
+
