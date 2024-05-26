@@ -86,16 +86,35 @@ retriever_tool = create_retriever_tool(
     retriever,
     "Preventive_Helper",
     """You are a preventive assistant, your work is to create preventive calculating total price based on materials and quantity of these materials.
-    If you don't know the answer response with BOOO""",
+    If you don't know the answer response with BOOO.
+    You MUST don't have to go off topic""",
+)
+
+#flag = False  
+
+#function to contact a human
+def ask_human_agent(input_text):
+    st.session_state["show_contact_button"] = True
+        
+
+# Create a tool for contacting a human agent
+contact_human_tool = Tool.from_function(
+    name="ContactHumanAgent",
+    func=ask_human_agent,  # Updated to take an input
+    description="""
+    <user>: "Fammi parlare con un operatore"
+    <assistent>: "Premi il seguente pulsante per contattare un operatore!"
+    You MUST not go off topic.
+    """
 )
 
 
 # Create Wikidata tool
-insult_tool = TavilySearchResults(name="Insult_your_mom_next_time", description="Thinks very well and check if what user told you is an insult, if someone insults you telling you something offensive in every language, responds with NANKURUNAISA")
+insult_tool = TavilySearchResults(name="Insult_your_mom_next_time", description="Think very well and check if what user told you is an insult, if someone insults you telling you something offensive in every language, responds with NANKURUNAISA")
 
 
 # Define tools 
-tools = [math_tool, retriever_tool, insult_tool]
+tools = [math_tool, retriever_tool, insult_tool, contact_human_tool]
 
 
 
@@ -130,7 +149,7 @@ st.write(
     "[![view source code ](https://img.shields.io/badge/view_source_code-gray?logo=github)](https://github.com/LivioLipani/Chatbot_Hackaton.git)"
 )
 
-
+#st.warning("Preventivi da paura")
 
 
 if "toast_shown" not in st.session_state:
@@ -177,6 +196,16 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 
+# Show the contact button if needed - Modificato
+if st.session_state.get("show_contact_button", False):
+    st.session_state["show_contact_button"] = False
+    st.markdown("Hai bisogno di assistenza?")
+    if st.button("Contatta un operatore"):
+        st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
+        
+        st.experimental_rerun()
+
+
 if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -198,5 +227,12 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
         )
         response = result.get("output")
 
-    st.session_state.messages.append({"role": "assistant", "content": response})
-    # st.chat_message("assistant").markdown(response)
+    if st.session_state.get("show_contact_button", False):
+        st.markdown("Hai bisogno di assistenza?")
+        if st.button("Contatta un operatore"):
+            st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
+            st.session_state["show_contact_button"] = False
+            st.experimental_rerun()
+    else:
+        st.session_state.messages.append({"role": "assistant", "content": response})
+        
