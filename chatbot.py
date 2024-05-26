@@ -251,7 +251,6 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
             callbacks=[stream_handler],
         )
         response = result.get("output")
-    st.session_state.messages.append({"role": "assistant", "content": response})
 
     if st.session_state.get("show_contact_button", False):
         st.markdown("Hai bisogno di assistenza?")
