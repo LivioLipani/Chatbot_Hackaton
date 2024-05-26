@@ -222,14 +222,14 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 
-# Show the contact button if needed - Modificato
-#if st.session_state.get("show_contact_button", False):
-#    st.session_state["show_contact_button"] = False
-#    st.markdown("Hai bisogno di assistenza?")
-#    if st.button("Contatta un operatore"):
-#        st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
-#        
-#        st.experimental_rerun()
+#Show the contact button if needed - Modificato
+if st.session_state.get("show_contact_button", False):
+    st.session_state["show_contact_button"] = False
+    st.markdown("Hai bisogno di assistenza?")
+    if st.button("Contatta un operatore"):
+        st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
+        
+        st.experimental_rerun()
 
 
 if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
@@ -251,7 +251,6 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
             callbacks=[stream_handler],
         )
         response = result.get("output")
-    
     st.session_state.messages.append({"role": "assistant", "content": response})
 
     if st.session_state.get("show_contact_button", False):
