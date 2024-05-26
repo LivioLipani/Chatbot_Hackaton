@@ -29,5 +29,7 @@ Richiedi ad esempio:
 
 *"Quanti operai sono necessari per costruire un edificio di 100 metri quadri?"*
 
+*"Puoi mettermi in contatto con un operatore?"*
+
 Puoi richiedere assistenza per qualunque tipo di edificio.
 Il nostro chatbot è disponibile in tempo reale, 24/7.
