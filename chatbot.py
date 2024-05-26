@@ -223,13 +223,13 @@ for message in st.session_state.messages:
 
 
 # Show the contact button if needed - Modificato
-if st.session_state.get("show_contact_button", False):
-    st.session_state["show_contact_button"] = False
-    st.markdown("Hai bisogno di assistenza?")
-    if st.button("Contatta un operatore"):
-        st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
-        
-        st.experimental_rerun()
+#if st.session_state.get("show_contact_button", False):
+#    st.session_state["show_contact_button"] = False
+#    st.markdown("Hai bisogno di assistenza?")
+#    if st.button("Contatta un operatore"):
+#        st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
+#        
+#        st.experimental_rerun()
 
 
 if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
@@ -254,12 +254,12 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
     
     st.session_state.messages.append({"role": "assistant", "content": response})
 
-    #if st.session_state.get("show_contact_button", False):
-    #    st.markdown("Hai bisogno di assistenza?")
-    #    if st.button("Contatta un operatore"):
-    #       st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
-    #        st.session_state["show_contact_button"] = False
-    #        st.experimental_rerun()
-    #else:
-    #    st.session_state.messages.append({"role": "assistant", "content": response})
+    if st.session_state.get("show_contact_button", False):
+        st.markdown("Hai bisogno di assistenza?")
+        if st.button("Contatta un operatore"):
+           st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
+            st.session_state["show_contact_button"] = False
+            st.experimental_rerun()
+    else:
+        st.session_state.messages.append({"role": "assistant", "content": response})
         
