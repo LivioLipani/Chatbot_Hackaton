@@ -259,5 +259,5 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
             st.session_state["show_contact_button"] = False
             st.experimental_rerun()
     else:
-        st.session_state.messages.append({"role": "assistant", "content": prompt})
+        st.session_state.messages.append({"role": "assistant", "content": response})
         
