@@ -229,7 +229,7 @@ if st.session_state.get("show_contact_button", False):
     if st.button("Contatta un operatore"):
         st.session_state["messages"].append({"role": "assistant", "content": "Un operatore sarà contattato a breve."})
         
-#        st.experimental_rerun()
+        st.experimental_rerun()
 
 
 if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
@@ -259,5 +259,5 @@ if prompt := st.chat_input("Scrivi un messaggio", key="first_question"):
             st.session_state["show_contact_button"] = False
             st.experimental_rerun()
     else:
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "assistant", "content": prompt})
         
