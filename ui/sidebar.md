@@ -20,7 +20,7 @@ Numero verde: +39 06 1234 5678
 
 ## Cosa puoi fare 
 
-Parla con Gianni! Il tuo assistente personale per stimare un preventivo per dedicarci ad un progetto che desideri far effettuare!
+Parla con Nico! Il tuo assistente personale per stimare un preventivo per dedicarci ad un progetto che desideri far effettuare!
 Richiedi ad esempio:
 
 *"Ho bisogno di un preventivo per la ristrutturazione di un bagno di 10 metri quadri ed alto 3 metri"*
