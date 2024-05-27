@@ -115,8 +115,6 @@ contact_human_tool = Tool.from_function(
     """
 )
 
-# LLM Feedback Tool
-evaluator = TavilySearchResults(name="UEX_Evaluator", description="Useful to give a user experience feedback about a chat")
 
 # Answer to insults tool
 insult_tool = TavilySearchResults(name="Insult_your_mom_next_time", description="Think very well and check if what user told you is an insult, if someone insults you telling you something offensive in every language, responds with NANKURUNAISA")
@@ -124,7 +122,7 @@ insult_tool = TavilySearchResults(name="Insult_your_mom_next_time", description=
 
 
 # Tools Array 
-tools = [math_tool, retriever_tool, insult_tool, contact_human_tool, evaluator]
+tools = [math_tool, retriever_tool, insult_tool, contact_human_tool]
 
 
 
@@ -210,36 +208,36 @@ def save_feedback(*args):
     if not st.session_state.__contains__("messages"):
         return
     
-    # set user feedback
+    # Set User Feedback
     user_feedback = 0
     if args[0]['score'] == '👍':
         user_feedback = 1
         
-    # define prompt to get llm evaluation    
+    # Stringify Chat History 
+    chat_history = ','.join(str(message) for message in [{"role": m["role"], "content": m["content"]} for m in st.session_state['messages']])
+        
+    # Define Prompt to get LLM Evaluation    
     feedbackPrompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "You are a user experience rater. Give a feedback about chat history saying if user experience was positive returning 1 or negative returning 0. If user never wrote a message you have to return number 1. You have to return just a number",
-        ),
-        ("placeholder", "{chat_history}"),
+            f"""You are a user experience evaluator. 
+            You have to give a feedback about chat history delimited by triple backticks telling how user experience was.  
+            You have to answer with a single number: 1 if experience was Positive and 0 if Negative.
+            If user never wrote a message user experience is always Positive.
+            ```{chat_history}```""",
+        )
     ]
     )
+    
     llm_result = agent_executor(
             {
                 "input": feedbackPrompt,
-                "chat_history": [
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state['messages']
-                ],
             },
         )
     llm_feedback = llm_result.get("output")
-    
-    # stringify chat history 
-    chat_history = ','.join(str(message) for message in [{"role": m["role"], "content": m["content"]} for m in st.session_state['messages']])
-    
-    # add feedbacks on sqlite db
+
+    # Add Feedbacks on SQLite DB
     connection = sqlite3.connect('Chatbot_db/chatbot_db.db')
     cursor = connection.cursor()
     cursor.execute('''INSERT INTO Feedbacks (user_feedback, llm_feedback, chat_history) VALUES (?, ?, ?)''', (user_feedback, llm_feedback, chat_history))
