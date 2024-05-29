@@ -4,7 +4,7 @@
 <details>
     <summary>Table of Contents</summary>
     <li><a href="#about-the-project">About the project</a></li>
-    <li><a href="#Built With">Built With</a></li>
+    <li><a href="#Built-With">Built With</a></li>
     <li><a href="#Contributing">Contributing</a></li>
   </ol>
 </details>
@@ -27,11 +27,14 @@ L'uso di VectorStore cloud e la definizione di tool e creazione di tool custom.
 
 ### What's next for Nico - The Cost Estimator
 Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata delle richieste alla memorizzazione efficiente dei dati.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Built With
 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -51,3 +54,4 @@ https://www.linkedin.com/in/eleonora-giuffrida-7795a130b/
 Livio Mattia Lipani
 https://www.linkedin.com/in/livio-mattia-lipani/
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
