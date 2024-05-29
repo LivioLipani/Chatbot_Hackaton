@@ -60,7 +60,7 @@ https://www.linkedin.com/in/livio-mattia-lipani/
 
 [LangChain.com]: https://img.shields.io/badge/%F0%9F%A6%9C%EF%B8%8F%F0%9F%94%97LangChain-LangChain
 [LangChain-url]: https://www.langchain.com
-[Openai.com]: https://a11ybadges.com/badge?logo=openai
+[Openai.com]: https://img.shields.io/badge/chatGPT-74aa9c?logo=openai&logoColor=white
 [Openai-url]: https://openai.com/
 
 
