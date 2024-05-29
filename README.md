@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-# Chatbot Nico - Hackathon Edition
+# Chatbot Nico - Neodata Hackathon 
 
 
 
