@@ -33,8 +33,8 @@ Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata 
 
 ## Built With
 
-* [![LangChain][LangChain]][LangChain-url]
-* [![Openai][Openai]][Openai-url]
+* [![LangChain][langchain.com]][LangChain-url]
+* [![Openai][openai.com]][Openai-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
