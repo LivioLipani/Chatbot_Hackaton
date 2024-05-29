@@ -29,7 +29,8 @@ L'uso di VectorStore cloud e la definizione di tool e creazione di tool custom.
 Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata delle richieste alla memorizzazione efficiente dei dati.
 
 ### Video della Demo
-<iframe width="560" height="315" src="[https://www.youtube.com/embed/video-id](https://youtu.be/wWmqEI3nUBM?si=PMCE5uODdClmbbqt)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/wWmqEI3nUBM?si=PMCE5uODdClmbbqt" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
 
 
 
