@@ -58,8 +58,8 @@ https://www.linkedin.com/in/livio-mattia-lipani/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-![LangChain.com](https://img.shields.io/badge/%F0%9F%A6%9C%EF%B8%8F%F0%9F%94%97LangChain-LangChain)
-[LangChain-url]: https://www.langchain.com/
+[LangChain.com]: https://img.shields.io/badge/%F0%9F%A6%9C%EF%B8%8F%F0%9F%94%97LangChain-LangChain
+[LangChain-url]: https://www.langchain.com
 [Openai.com]: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/1200px-OpenAI_Logo.svg.png
 [Openai-url]: https://openai.com
 
