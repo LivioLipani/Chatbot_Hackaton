@@ -35,6 +35,9 @@ Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata 
 
 * [![LangChain][LangChain.com]][LangChain-url]
 * [![Openai][openai.com]][Openai-url]
+* Pinecone
+* Python
+* Streamlit
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
