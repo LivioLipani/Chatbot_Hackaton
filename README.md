@@ -69,7 +69,7 @@ https://www.linkedin.com/in/livio-mattia-lipani/
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-[LangChain-url]: [[https://nextjs.org/](https://devblogs.microsoft.com/azure-sql/wp-content/uploads/sites/56/2024/02/langchain.png)](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-[Openai-url]: [[https://nextjs.org/](https://devblogs.microsoft.com/azure-sql/wp-content/uploads/sites/56/2024/02/langchain.png)](https://d-cb.jc-cdn.com/sites/crackberry.com/files/styles/large/public/article_images/2023/08/openai-logo.jpg)
+[LangChain-url]: 
+[Openai-url]: (https://devblogs.microsoft.com/azure-sql/wp-content/uploads/sites/56/2024/02/langchain.png)](https://d-cb.jc-cdn.com/sites/crackberry.com/files/styles/large/public/article_images/2023/08/openai-logo.jpg)
 
 
