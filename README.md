@@ -1,3 +1,4 @@
+<a href="#readme-top"></a>
 # Chatbot Nico - Hackathon Edition
 
 <details>
@@ -6,6 +7,7 @@
     <li><a href="##Contributing">Contributing</a></li>
   </ol>
 </details>
+
 
 ## What it does
 Nico è un chatbot intelligente che semplifica e velocizza la creazione dei preventivi di stima.
@@ -24,6 +26,8 @@ L'uso di VectorStore cloud e la definizione di tool e creazione di tool custom.
 
 ## What's next for Nico - The Cost Estimator
 Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata delle richieste alla memorizzazione efficiente dei dati.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Built With
 
