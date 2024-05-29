@@ -1,6 +1,8 @@
 <a name="readme-top"></a>
 # Chatbot Nico - Hackathon Edition
 
+
+
 <details>
     <summary>Table of Contents</summary>
     <li><a href="#about-the-project">About the project</a></li>
@@ -10,6 +12,9 @@
 </details>
 
 ## About The Project
+
+[![Nico - The Cost Estimator][product-screenshot]](https://chatbot-nico.streamlit.app/)
+
 ### What it does
 Nico è un chatbot intelligente che semplifica e velocizza la creazione dei preventivi di stima.
 
@@ -68,6 +73,7 @@ https://www.linkedin.com/in/livio-mattia-lipani/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+[product-screenshot]: images/demo_image.png
 [LangChain.com]: https://img.shields.io/badge/%F0%9F%A6%9C%EF%B8%8F%F0%9F%94%97LangChain-LangChain
 [LangChain-url]: https://www.langchain.com
 [Openai.com]: https://img.shields.io/badge/chatGPT-74aa9c?logo=openai&logoColor=white
