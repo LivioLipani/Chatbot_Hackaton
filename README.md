@@ -2,9 +2,10 @@
 # Chatbot Nico - Hackathon Edition
 
 <details>
-    <li><a href="##about-the-project">About the project</a></li>
-    <li><a href="##Built With">Built With</a></li>
-    <li><a href="##Contributing">Contributing</a></li>
+    <summary>Table of Contents</summary>
+    <li><a href="#about-the-project">About the project</a></li>
+    <li><a href="#Built With">Built With</a></li>
+    <li><a href="#Contributing">Contributing</a></li>
   </ol>
 </details>
 
