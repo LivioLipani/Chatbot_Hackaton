@@ -1,4 +1,4 @@
-<a href="#readme-top"></a>
+<a name="readme-top"></a>
 # Chatbot Nico - Hackathon Edition
 
 <details>
@@ -33,6 +33,8 @@ Nico ha ancora un grandissimo margine di miglioramento, dalla gestione accurata 
 
 ## Built With
 
+* [![LangChain][LangChain]][LangChain-url]
+* [![Openai][Openai]][Openai-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -55,3 +57,8 @@ Livio Mattia Lipani
 https://www.linkedin.com/in/livio-mattia-lipani/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+[LangChain-url]: [https://nextjs.org/](https://devblogs.microsoft.com/azure-sql/wp-content/uploads/sites/56/2024/02/langchain.png)
+[Openai-url]: [[https://nextjs.org/](https://devblogs.microsoft.com/azure-sql/wp-content/uploads/sites/56/2024/02/langchain.png)](https://d-cb.jc-cdn.com/sites/crackberry.com/files/styles/large/public/article_images/2023/08/openai-logo.jpg)
+
+
